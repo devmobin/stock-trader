@@ -20,7 +20,7 @@
         <div class="pull-right">
           <button
             class="btn btn-success"
-            @click="sellStock"
+            @click="onSellStock"
             :disabled="
               insufficientQuantity ||
               quantity <= 0 ||
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   props: ["stock"],
   data() {
@@ -42,7 +43,16 @@ export default {
     };
   },
   methods: {
-    sellStock() {}
+    ...mapActions(["sellStock"]),
+    onSellStock() {
+      const order = {
+        stockId: this.stock.id,
+        stockPrice: this.stock.price,
+        quantity: this.quantity
+      };
+      this.sellStock(order);
+      this.quantity = 0;
+    }
   }
 };
 </script>
