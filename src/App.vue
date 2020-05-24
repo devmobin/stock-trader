@@ -1,9 +1,26 @@
 <template>
-  <div class="container"></div>
+  <div class="container">
+    <Header></Header>
+    <div class="row">
+      <div class="col-md-12">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {};
+import Header from './components/Header';
+
+export default {
+  components: {
+    Header,
+  },
+};
 </script>
 
-<style></style>
+<style>
+  body {
+    padding: 30px;
+  }
+</style>
