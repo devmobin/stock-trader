@@ -22,7 +22,7 @@ const getters = {
 
 const mutations = {
   BUY_STOCK(state, { stockId, quantity, stockPrice }) {
-    const record = state.stocks.find((s) => s.id === stockId);
+    const record = state.stocks.find((s) => s.id == stockId);
     if (record) {
       record.quantity += quantity;
     } else {
