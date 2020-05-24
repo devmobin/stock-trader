@@ -27,9 +27,7 @@
               +quantity <= 0 ||
               !Number.isInteger(+quantity)
             "
-          >
-            {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}
-          </button>
+          >{{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}</button>
         </div>
       </div>
     </div>
@@ -38,10 +36,10 @@
 
 <script>
 export default {
-  props: ['stock'],
+  props: ["stock"],
   data() {
     return {
-      quantity: 0,
+      quantity: 0
     };
   },
   methods: {
@@ -49,12 +47,12 @@ export default {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quantity: this.quantity,
+        quantity: this.quantity
       };
-      console.log(order);
+      this.$store.dispatch("buyStock", order);
       this.quantity = 0;
-    },
-  },
+    }
+  }
 };
 </script>
 
