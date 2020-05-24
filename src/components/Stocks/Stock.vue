@@ -21,7 +21,7 @@
         <div class="pull-right">
           <button
             class="btn btn-success"
-            @click="buyStock"
+            @click="onBuyStock"
             :disabled="
               insufficientFunds ||
               +quantity <= 0 ||
@@ -43,7 +43,7 @@ export default {
     };
   },
   methods: {
-    buyStock() {
+    onBuyStock() {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
