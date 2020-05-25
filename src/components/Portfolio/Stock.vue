@@ -4,7 +4,9 @@
       <div class="panel-heading">
         <h3 class="panel-title">
           {{ stock.name }}
-          <small>(Price: {{ stock.price }} | Quantity: {{ stock.quantity }})</small>
+          <small
+            >(Price: {{ stock.price }} | Quantity: {{ stock.quantity }})</small
+          >
         </h3>
       </div>
       <div class="panel-body">
@@ -20,13 +22,15 @@
         <div class="pull-right">
           <button
             class="btn btn-success"
-            @click="onSellStock"
+            @click="sellStock"
             :disabled="
               insufficientQuantity ||
-              quantity <= 0 ||
-              !Number.isInteger(quantity)
+                quantity <= 0 ||
+                !Number.isInteger(quantity)
             "
-          >{{ insufficientQuantity ? 'Not enough' : 'Sell' }}</button>
+          >
+            {{ insufficientQuantity ? 'Not enough' : 'Sell' }}
+          </button>
         </div>
       </div>
     </div>
@@ -34,27 +38,38 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
-  props: ["stock"],
+  props: ['stock'],
   data() {
     return {
-      quantity: 0
+      quantity: 0,
     };
   },
+  computed: {
+    insufficientQuantity() {
+      return this.quantity > this.stock.quantity;
+    },
+  },
   methods: {
-    ...mapActions(["sellStock"]),
-    onSellStock() {
+    ...mapActions({
+      placeSellOrder: 'sellStock',
+    }),
+    sellStock() {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quantity: this.quantity
+        quantity: this.quantity,
       };
-      this.sellStock(order);
+      this.placeSellOrder(order);
       this.quantity = 0;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+.danger {
+  border: 1px solid red;
+}
+</style>
