@@ -19,10 +19,11 @@
         >
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" @click="endDay">End Day</a></li>
-          <!-- <li
+          <li
             class="dropdown"
             :class="{ open: isDropdownOpen }"
-            @click="isDropdownOpen = !isDropdownOpen"
+            @mouseenter="isDropdownOpen = true"
+            @mouseleave="isDropdownOpen = false"
           >
             <a
               href="#"
@@ -34,10 +35,10 @@
               >Save & Load <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a href="#" @click="saveData">Save Data</a></li>
-              <li><a href="#" @click="loadData">Load Data</a></li>
+              <li><a href="#">Save Data</a></li>
+              <li><a href="#">Load Data</a></li>
             </ul>
-          </li> -->
+          </li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -51,7 +52,9 @@ import { mapActions } from 'vuex';
 
 export default {
   data() {
-    return {};
+    return {
+      isDropdownOpen: false,
+    };
   },
   computed: {
     funds() {
