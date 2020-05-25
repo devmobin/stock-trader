@@ -39,22 +39,22 @@ body {
 
 @keyframes slide-in {
   from {
-    transform: translateY(-30px);
+    transform: translateX(30px);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
   }
 }
 
 @keyframes slide-out {
   from {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
   }
   to {
-    transform: translateY(-30px);
+    transform: translateX(-30px);
     opacity: 0;
   }
 }
