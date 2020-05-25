@@ -18,7 +18,7 @@
           >Funds: {{ funds | currency }}</strong
         >
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" @click="endDay">End Day</a></li>
+          <li><a href="#" @click="onEndDay">End Day</a></li>
           <li
             class="dropdown"
             :class="{ open: isDropdownOpen }"
@@ -67,7 +67,7 @@ export default {
       randomizeStocks: 'randomizeStocks',
       loadData: 'loadData',
     }),
-    endDay() {
+    onEndDay() {
       this.randomizeStocks();
     },
     onSaveData() {

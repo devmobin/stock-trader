@@ -22,7 +22,7 @@
         <div class="pull-right">
           <button
             class="btn btn-success"
-            @click="sellStock"
+            @click="onSellStock"
             :disabled="
               insufficientQuantity ||
                 quantity <= 0 ||
@@ -55,7 +55,7 @@ export default {
     ...mapActions({
       placeSellOrder: 'sellStock',
     }),
-    sellStock() {
+    onSellStock() {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
