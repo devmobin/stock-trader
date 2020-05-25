@@ -14,7 +14,11 @@ const mutations = {
   },
   RND_STOCKS(state) {
     state.stocks.forEach((stock) => {
-      stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+      const min = stock.price + Math.floor((-5 * stock.price) / 100);
+      const max = stock.price + Math.floor((6 * stock.price) / 100);
+
+      const random = Math.floor(Math.random() * (max - min + 1) + min);
+      stock.price = random ? random : 100;
     });
   },
 };
