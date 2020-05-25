@@ -35,8 +35,8 @@
               >Save & Load <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Save Data</a></li>
-              <li><a href="#">Load Data</a></li>
+              <li><a href="#" @click="onSaveData">Save Data</a></li>
+              <li><a href="#" @click="onLoadData">Load Data</a></li>
             </ul>
           </li>
         </ul>
@@ -49,6 +49,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { save } from '../api/local';
 
 export default {
   data() {
@@ -64,9 +65,21 @@ export default {
   methods: {
     ...mapActions({
       randomizeStocks: 'randomizeStocks',
+      loadData: 'loadData',
     }),
     endDay() {
       this.randomizeStocks();
+    },
+    onSaveData() {
+      const data = {
+        funds: this.$store.getters.funds,
+        stockPortfolio: this.$store.getters.stocksPortfolio,
+        stocks: this.$store.getters.stocks,
+      };
+      save(data);
+    },
+    onLoadData() {
+      this.loadData();
     },
   },
 };
