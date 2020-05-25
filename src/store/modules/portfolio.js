@@ -4,9 +4,9 @@ const state = {
 };
 
 const getters = {
-  stocksPortfolio(state, getters) {
+  getStocksPortfolio(state, getters) {
     return state.stocks.map((stock) => {
-      const record = getters.stocks.find((s) => s.id == stock.id);
+      const record = getters.getStocks.find((s) => s.id == stock.id);
       return {
         id: stock.id,
         name: record.name,
@@ -15,17 +15,17 @@ const getters = {
       };
     });
   },
-  funds(state) {
+  getFunds(state) {
     return state.funds;
   },
 };
 
 const mutations = {
-  SET_PORTFOLIO(state, portfolio) {
+  doSetPortfolio(state, portfolio) {
     state.funds = portfolio.funds;
     state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : [];
   },
-  BUY_STOCK(state, { stockId, quantity, stockPrice }) {
+  doBuyStocks(state, { stockId, quantity, stockPrice }) {
     const record = state.stocks.find((s) => s.id == stockId);
     if (record) {
       record.quantity += quantity;
@@ -37,7 +37,7 @@ const mutations = {
     }
     state.funds -= stockPrice * quantity;
   },
-  SELL_STOCKS(state, { stockId, quantity, stockPrice }) {
+  doSellStocks(state, { stockId, quantity, stockPrice }) {
     const record = state.stocks.find((s) => s.id === stockId);
     if (record.quantity > quantity) {
       record.quantity -= quantity;
@@ -49,8 +49,8 @@ const mutations = {
 };
 
 const actions = {
-  sellStock: ({ commit }, order) => {
-    commit('SELL_STOCKS', order);
+  onSellStockAction: ({ commit }, order) => {
+    commit('doSellStocks', order);
   },
 };
 

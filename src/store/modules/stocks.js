@@ -5,14 +5,14 @@ const state = {
 };
 
 const getters = {
-  stocks: (state) => state.stocks,
+  getStocks: (state) => state.stocks,
 };
 
 const mutations = {
-  SET_STOCKS(state, stocks) {
+  doSetStocks(state, stocks) {
     state.stocks = stocks;
   },
-  RND_STOCKS(state) {
+  doRandomizeStocks(state) {
     state.stocks.forEach((stock) => {
       const min = stock.price + Math.floor((-5 * stock.price) / 100);
       const max = stock.price + Math.floor((6 * stock.price) / 100);
@@ -24,14 +24,14 @@ const mutations = {
 };
 
 const actions = {
-  buyStock: ({ commit }, order) => {
-    commit('BUY_STOCK', order);
+  onBuyStockAction: ({ commit }, order) => {
+    commit('doBuyStocks', order);
   },
-  initStocks: ({ commit }) => {
-    commit('SET_STOCKS', stocks);
+  onInitStocksAction: ({ commit }) => {
+    commit('doSetStocks', stocks);
   },
-  randomizeStocks: ({ commit }) => {
-    commit('RND_STOCKS');
+  onRandomizeStocksPriceAction: ({ commit }) => {
+    commit('doRandomizeStocks');
   },
 };
 

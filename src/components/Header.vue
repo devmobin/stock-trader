@@ -59,22 +59,22 @@ export default {
   },
   computed: {
     funds() {
-      return this.$store.getters.funds;
+      return this.$store.getters.getFunds;
     },
   },
   methods: {
     ...mapActions({
-      randomizeStocks: 'randomizeStocks',
-      loadData: 'loadData',
+      randomizeStocks: 'onRandomizeStocksPriceAction',
+      loadData: 'onLoadDataAction',
     }),
     onEndDay() {
       this.randomizeStocks();
     },
     onSaveData() {
       const data = {
-        funds: this.$store.getters.funds,
-        stockPortfolio: this.$store.getters.stocksPortfolio,
-        stocks: this.$store.getters.stocks,
+        funds: this.$store.getters.getFunds,
+        stockPortfolio: this.$store.getters.getStocksPortfolio,
+        stocks: this.$store.getters.getStocks,
       };
       save(data);
     },

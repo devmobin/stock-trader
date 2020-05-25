@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     funds() {
-      return this.$store.getters.funds;
+      return this.$store.getters.getFunds;
     },
     insufficientFunds() {
       return this.quantity * this.stock.price > this.funds;
@@ -59,7 +59,7 @@ export default {
         stockPrice: this.stock.price,
         quantity: +this.quantity,
       };
-      this.$store.dispatch('buyStock', order);
+      this.$store.dispatch('onBuyStockAction', order);
       this.quantity = 0;
     },
   },

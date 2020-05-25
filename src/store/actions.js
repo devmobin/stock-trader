@@ -1,6 +1,6 @@
 import { load } from '../api/local';
 
-export const loadData = ({ commit }) => {
+export const onLoadDataAction = ({ commit }) => {
   const data = load();
   if (data) {
     const stocks = data.stocks;
@@ -12,7 +12,7 @@ export const loadData = ({ commit }) => {
       funds,
     };
 
-    commit('SET_STOCKS', stocks);
-    commit('SET_PORTFOLIO', portfolio);
+    commit('doSetStocks', stocks);
+    commit('doSetPortfolio', portfolio);
   }
 };
