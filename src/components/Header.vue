@@ -19,7 +19,7 @@
         >
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" @click="endDay">End Day</a></li>
-          <li
+          <!-- <li
             class="dropdown"
             :class="{ open: isDropdownOpen }"
             @click="isDropdownOpen = !isDropdownOpen"
@@ -37,7 +37,7 @@
               <li><a href="#" @click="saveData">Save Data</a></li>
               <li><a href="#" @click="loadData">Load Data</a></li>
             </ul>
-          </li>
+          </li> -->
         </ul>
       </div>
       <!-- /.navbar-collapse -->
