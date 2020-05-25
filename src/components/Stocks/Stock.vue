@@ -21,13 +21,15 @@
         <div class="pull-right">
           <button
             class="btn btn-success"
-            @click="onBuyStock"
+            @click="buyStock"
             :disabled="
               insufficientFunds ||
-              +quantity <= 0 ||
-              !Number.isInteger(+quantity)
+                +quantity <= 0 ||
+                !Number.isInteger(+quantity)
             "
-          >{{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}</button>
+          >
+            {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}
+          </button>
         </div>
       </div>
     </div>
@@ -36,23 +38,31 @@
 
 <script>
 export default {
-  props: ["stock"],
+  props: ['stock'],
   data() {
     return {
-      quantity: 0
+      quantity: 0,
     };
   },
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.funds;
+    },
+  },
   methods: {
-    onBuyStock() {
+    buyStock() {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quantity: this.quantity
+        quantity: +this.quantity,
       };
-      this.$store.dispatch("buyStock", order);
+      this.$store.dispatch('buyStock', order);
       this.quantity = 0;
-    }
-  }
+    },
+  },
 };
 </script>
 
