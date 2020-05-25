@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home';
-import Portfolio from '../views/Portfolio';
-import StocksList from '../components/Stocks/StocksList';
+import Home from '@/views/Home';
+import Portfolio from '@/views/Portfolio';
+import StocksList from '@/components/Stocks/StocksList';
 
 Vue.use(VueRouter);
 
@@ -15,12 +15,12 @@ const routes = [
   {
     path: '/portfolio',
     name: 'Portfolio',
-    component: Portfolio
+    component: Portfolio,
   },
   {
     path: '/stocks',
     name: 'Stocks',
-    component: StocksList
+    component: StocksList,
   },
 ];
 

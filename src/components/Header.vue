@@ -49,7 +49,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { save } from '../api/local';
+import { save } from '@/api/local';
 
 export default {
   data() {

@@ -6,7 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Stock from '../components/Portfolio/Stock';
+import Stock from '@/components/Portfolio/Stock';
 
 export default {
   computed: {
