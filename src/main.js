@@ -2,10 +2,7 @@ import Vue from 'vue';
 import router from './routes';
 import store from './store';
 import App from './App.vue';
-
-Vue.filter('currency', (value) => {
-  return `$ ${value.toLocaleString()}`;
-});
+import './helpers/filters';
 
 new Vue({
   el: '#app',
