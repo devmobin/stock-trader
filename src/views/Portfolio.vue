@@ -1,22 +1,22 @@
 <template>
   <div>
-    <Stock v-for="stock in stocks" :key="stock.id"></Stock>
+    <Stock v-for="stock in stocks" :key="stock.id" :stock="stock"></Stock>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Stock from "../components/Portfolio/Stock";
+import { mapGetters } from 'vuex';
+import Stock from '../components/Portfolio/Stock';
 
 export default {
   computed: {
     ...mapGetters({
-      stocks: "stocksProtfolio"
-    })
+      stocks: 'stocksPortfolio',
+    }),
   },
   components: {
-    Stock
-  }
+    Stock,
+  },
 };
 </script>
 
