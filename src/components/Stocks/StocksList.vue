@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <Stock v-for="stock of stocks" :key="stock.id" :stock="stock"></Stock>
   </div>
 </template>
