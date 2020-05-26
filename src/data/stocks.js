@@ -17,6 +17,6 @@ export default [
   {
     id: 4,
     name: 'Twitter',
-    price: 8,
+    price: 80,
   },
 ];
