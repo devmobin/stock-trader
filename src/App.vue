@@ -2,13 +2,9 @@
   <div>
     <Header></Header>
     <div class="container mt-3">
-      <div class="row">
-        <div class="col-xs-12">
-          <transition name="slide" mode="out-in">
-            <router-view></router-view>
-          </transition>
-        </div>
-      </div>
+      <transition name="slide" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
