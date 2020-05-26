@@ -12,6 +12,8 @@ const getters = {
         name: record.name,
         price: record.price,
         quantity: stock.quantity,
+        buys: stock.buys,
+        lastBuyPrice: stock.buys[stock.buys.length - 1],
       };
     });
   },
@@ -29,10 +31,12 @@ const mutations = {
     const record = state.stocks.find((s) => s.id == stockId);
     if (record) {
       record.quantity += quantity;
+      record.buys.push(stockPrice);
     } else {
       state.stocks.push({
         id: stockId,
         quantity,
+        buys: [stockPrice],
       });
     }
     state.funds -= stockPrice * quantity;
