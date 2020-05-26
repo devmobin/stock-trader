@@ -1,11 +1,13 @@
 <template>
-  <div class="container">
+  <div>
     <Header></Header>
-    <div class="row">
-      <div class="col-xs-12">
-        <transition name="slide" mode="out-in">
-          <router-view></router-view>
-        </transition>
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-xs-12">
+          <transition name="slide" mode="out-in">
+            <router-view></router-view>
+          </transition>
+        </div>
       </div>
     </div>
   </div>
@@ -25,10 +27,6 @@ export default {
 </script>
 
 <style>
-body {
-  padding: 30px;
-}
-
 .slide-enter-active {
   animation: slide-in 200ms ease-out forwards;
 }

@@ -1,49 +1,73 @@
 <template>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <router-link to="/" class="navbar-brand">Stock Trader</router-link>
-      </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <router-link to="/" class="navbar-brand">Stock Trader</router-link>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <router-link to="/portfolio" activeClass="active" tag="li"
-            ><a>Portfolio</a></router-link
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <router-link
+            class="nav-item"
+            to="/"
+            :exact="true"
+            activeClass="active"
+            tag="li"
           >
-          <router-link to="/stocks" activeClass="active" tag="li"
-            ><a>Stocks</a></router-link
+            <a class="nav-link">Home</a>
+          </router-link>
+          <router-link
+            class="nav-item"
+            to="/portfolio"
+            activeClass="active"
+            tag="li"
           >
+            <a class="nav-link">Portfolio</a>
+          </router-link>
+          <router-link
+            class="nav-item"
+            to="/stocks"
+            activeClass="active"
+            tag="li"
+          >
+            <a class="nav-link">Stocks</a>
+          </router-link>
         </ul>
-        <strong class="navbar-text navbar-right"
-          >Funds: {{ funds | currency }}</strong
-        >
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" @click="onEndDay">End Day</a></li>
-          <li
-            class="dropdown"
-            :class="{ open: isDropdownOpen }"
-            @mouseenter="isDropdownOpen = true"
-            @mouseleave="isDropdownOpen = false"
-          >
+
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" @click="onEndDay">End Day</a>
+          </li>
+          <li class="nav-item dropdown">
             <a
-              href="#"
-              class="dropdown-toggle"
-              data-toggle="dropdown"
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink"
               role="button"
+              data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-              >Save & Load <span class="caret"></span
-            ></a>
-            <ul class="dropdown-menu">
-              <li><a href="#" @click="onSaveData">Save Data</a></li>
-              <li><a href="#" @click="onLoadData">Load Data</a></li>
-            </ul>
+            >
+              Save & Load
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" @click="onSaveData">Save Data</a>
+              <a class="dropdown-item" @click="onLoadData">Load Data</a>
+            </div>
           </li>
         </ul>
+
+        <strong class="navbar-text"> Funds: {{ funds | currency }} </strong>
       </div>
-      <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container-fluid -->
   </nav>
 </template>
 
@@ -85,4 +109,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+li,
+a {
+  cursor: pointer;
+}
+</style>
