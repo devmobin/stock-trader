@@ -4,7 +4,8 @@
       <div class="card-header">{{ stock.name }}</div>
       <div class="card-body text-primary">
         <h5 class="card-title">
-          Price: {{ stock.price | currency }} | Quantity: {{ stock.quantity }}
+          Price: {{ stock.price | currency }} | Quantity:
+          {{ stock.inPortfolioQuantity }}
         </h5>
         <p class="card-text">
           Your last buy: {{ stock.lastBuyPrice | currency }}
@@ -34,6 +35,9 @@
 
 <script>
 import { mapActions } from 'vuex';
+import Order from '@/store/models/Order';
+import Stock from '@/store/models/Stock';
+
 export default {
   props: ['stock'],
   data() {
@@ -43,20 +47,19 @@ export default {
   },
   computed: {
     insufficientQuantity() {
-      return this.quantity > this.stock.quantity;
+      return this.quantity > this.stock.inPortfolioQuantity;
     },
   },
   methods: {
     ...mapActions({
-      placeSellOrder: 'onSellStockAction',
+      onSellStockAction: 'onSellStockAction',
     }),
     onSellStock() {
-      const order = {
-        stockId: this.stock.id,
-        stockPrice: this.stock.price,
-        quantity: this.quantity,
-      };
-      this.placeSellOrder(order);
+      const order = new Order(
+        new Stock(this.stock.id, this.stock.name, this.stock.price),
+        this.quantity
+      );
+      this.onSellStockAction(order);
       this.quantity = 0;
     },
   },

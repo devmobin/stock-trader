@@ -1,22 +1,12 @@
+import Stock from '../store/models/Stock';
+
 export default [
-  {
-    id: 1,
-    name: 'BMW',
-    price: 110,
-  },
-  {
-    id: 2,
-    name: 'Google',
-    price: 200,
-  },
-  {
-    id: 3,
-    name: 'Apple',
-    price: 250,
-  },
-  {
-    id: 4,
-    name: 'Twitter',
-    price: 80,
-  },
+  new Stock(1, 'BMW', 110),
+  new Stock(2, 'Google', 200),
+  new Stock(3, 'Apple', 250),
+  new Stock(4, 'Twitter', 180),
+  new Stock(5, 'Amazon', 280),
+  new Stock(6, 'Tesla', 245),
+  new Stock(7, 'Microsoft', 265),
+  new Stock(8, 'Lenovo', 162),
 ];

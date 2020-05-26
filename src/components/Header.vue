@@ -74,12 +74,11 @@
 <script>
 import { mapActions } from 'vuex';
 import { save } from '@/api/local';
+import Portfolio from '@/store/models/Portfolio';
 
 export default {
   data() {
-    return {
-      isDropdownOpen: false,
-    };
+    return {};
   },
   computed: {
     funds() {
@@ -88,22 +87,24 @@ export default {
   },
   methods: {
     ...mapActions({
-      randomizeStocks: 'onRandomizeStocksPriceAction',
-      loadData: 'onLoadDataAction',
+      onRandomizeStocksPriceAction: 'onRandomizeStocksPriceAction',
+      onLoadDataAction: 'onLoadDataAction',
     }),
     onEndDay() {
-      this.randomizeStocks();
+      this.onRandomizeStocksPriceAction();
     },
     onSaveData() {
       const data = {
-        funds: this.$store.getters.getFunds,
-        stockPortfolio: this.$store.getters.getStocksPortfolio,
-        stocks: this.$store.getters.getStocks,
+        portfolio: new Portfolio(
+          this.$store.getters.getPortfolioStocks,
+          this.$store.getters.getFunds
+        ),
+        localStocks: this.$store.getters.getStocks,
       };
       save(data);
     },
     onLoadData() {
-      this.loadData();
+      this.onLoadDataAction();
     },
   },
 };

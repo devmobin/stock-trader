@@ -1,18 +1,14 @@
 import { load } from '../api/local';
+import Portfolio from './models/Portfolio';
 
 export const onLoadDataAction = ({ commit }) => {
   const data = load();
   if (data) {
-    const stocks = data.stocks;
-    const funds = data.funds;
-    const stockPortfolio = data.stockPortfolio;
+    commit('doSetStocks', data.localStocks);
 
-    const portfolio = {
-      stockPortfolio,
-      funds,
-    };
-
-    commit('doSetStocks', stocks);
-    commit('doSetPortfolio', portfolio);
+    commit(
+      'doSetPortfolio',
+      new Portfolio(data.portfolio.stocks, data.portfolio.funds)
+    );
   }
 };

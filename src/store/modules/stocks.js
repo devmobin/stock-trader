@@ -1,4 +1,4 @@
-import stocks from '../../data/stocks';
+import localStocks from '../../data/stocks';
 
 const state = {
   stocks: [],
@@ -26,9 +26,9 @@ const mutations = {
 const actions = {
   onBuyStockAction: ({ commit }, order) => {
     commit('doBuyStocks', order);
-  },
+  }, // TODO: this do not belong to this file
   onInitStocksAction: ({ commit }) => {
-    commit('doSetStocks', stocks);
+    commit('doSetStocks', localStocks);
   },
   onRandomizeStocksPriceAction: ({ commit }) => {
     commit('doRandomizeStocks');

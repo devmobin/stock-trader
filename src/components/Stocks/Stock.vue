@@ -34,6 +34,9 @@
 </template>
 
 <script>
+import Order from '@/store/models/Order';
+import Stock from '@/store/models/Stock';
+
 export default {
   props: ['stock'],
   data() {
@@ -51,11 +54,10 @@ export default {
   },
   methods: {
     onBuyStock() {
-      const order = {
-        stockId: this.stock.id,
-        stockPrice: this.stock.price,
-        quantity: +this.quantity,
-      };
+      const order = new Order(
+        new Stock(this.stock.id, this.stock.name, this.stock.price),
+        this.quantity
+      );
       this.$store.dispatch('onBuyStockAction', order);
       this.quantity = 0;
     },
