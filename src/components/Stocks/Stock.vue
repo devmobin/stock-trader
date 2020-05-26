@@ -6,9 +6,10 @@
       </div>
       <div class="card-body text-success">
         <h6 class="card-title">Price: {{ stock.price | currency }}</h6>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+        <p class="card-text text-dark">
+          Yesterday Price: {{ stock.yesterdayPrice }} <br />
+          <small class="text-danger"> Today Min: {{ todayMin }} </small> \
+          <small class="text-success"> Today Max: {{ todayMax }} </small>
         </p>
         <input
           type="number"
@@ -51,6 +52,14 @@ export default {
     insufficientFunds() {
       return this.quantity * this.stock.price > this.funds;
     },
+    todayMin() {
+      const { min } = this.$store.getters.getMinMaxPrice(this.stock.price);
+      return min;
+    },
+    todayMax() {
+      const { max } = this.$store.getters.getMinMaxPrice(this.stock.price);
+      return max;
+    },
   },
   methods: {
     onBuyStock() {
@@ -71,5 +80,8 @@ input:focus {
   border-color: rgb(150, 150, 150);
   background-color: rgba(211, 255, 198, 0.295);
   box-shadow: none;
+}
+p.text-dark {
+  white-space: pre !important;
 }
 </style>

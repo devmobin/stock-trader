@@ -5,19 +5,40 @@ const state = {
 };
 
 const getters = {
-  getStocks: (state) => state.stocks,
+  getStocks: (state) => {
+    return state.stocks.map((stock) => {
+      const { min, max } = _getMinMaxPrice(stock.price);
+      stock.min = min;
+      stock.max = max;
+
+      return stock;
+    });
+  },
+  getMinMaxPrice() {
+    return (price) => {
+      const { min, max } = _getMinMaxPrice(price);
+      return { min, max };
+    };
+  },
 };
 
 const mutations = {
   doSetStocks(state, stocks) {
-    state.stocks = stocks;
+    state.stocks = stocks.map((stock) => {
+      stock.yesterdayPrice = stock.yesterdayPrice
+        ? stock.yesterdayPrice
+        : stock.price;
+
+      return stock;
+    });
   },
   doRandomizeStocks(state) {
     state.stocks.forEach((stock) => {
-      const min = stock.price + Math.floor((-5 * stock.price) / 100);
-      const max = stock.price + Math.floor((6 * stock.price) / 100);
+      const { min, max } = _getMinMaxPrice(stock.price);
 
       const random = Math.floor(Math.random() * (max - min + 1) + min);
+
+      stock.yesterdayPrice = stock.price;
       stock.price = random ? random : 100;
     });
   },
@@ -40,4 +61,13 @@ export default {
   getters,
   mutations,
   actions,
+};
+
+const _getMinMaxPrice = (price) => {
+  const min = price + Math.floor((-5 * price) / 100);
+  const max = price + Math.floor((6 * price) / 100);
+  return {
+    min,
+    max,
+  };
 };
