@@ -4,11 +4,14 @@
       <div class="card-header">{{ stock.name }}</div>
       <div class="card-body text-primary">
         <h5 class="card-title">
-          Price: {{ stock.price | currency }} | Quantity:
-          {{ stock.inPortfolioQuantity }}
+          Price: {{ stock.price | currency }}
+          <small class="text-dark">
+            | Quantity: {{ stock.inPortfolioQuantity }}
+          </small>
         </h5>
         <p class="card-text">
-          Your last buy: {{ stock.lastBuyPrice | currency }}
+          Your last buy: {{ stock.lastBuyPrice | currency }} <br />
+          Your buys average: {{ average | currency }}
         </p>
         <input
           type="number"
@@ -48,6 +51,11 @@ export default {
   computed: {
     insufficientQuantity() {
       return this.quantity > this.stock.inPortfolioQuantity;
+    },
+    average() {
+      let average =
+        this.stock.buys.reduce((a, b) => a + b) / this.stock.buys.length;
+      return average;
     },
   },
   methods: {
