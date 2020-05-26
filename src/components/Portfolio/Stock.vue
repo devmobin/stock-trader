@@ -63,8 +63,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .danger {
   border: 1px solid red;
+}
+
+input:focus {
+  outline: none !important;
+  border-color: rgb(150, 150, 150);
+  background-color: rgba(198, 223, 255, 0.295);
+  box-shadow: none;
 }
 </style>
