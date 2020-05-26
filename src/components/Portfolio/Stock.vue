@@ -1,38 +1,33 @@
 <template>
-  <div class="col-sm-6 col-md-4">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          {{ stock.name }}
-          <small
-            >(Price: {{ stock.price | currency }} | Quantity:
-            {{ stock.quantity }})</small
-          >
-        </h3>
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="card border-primary mb-3" style="max-width: 18rem;">
+      <div class="card-header">{{ stock.name }}</div>
+      <div class="card-body text-primary">
+        <h5 class="card-title">
+          Price: {{ stock.price | currency }} | Quantity: {{ stock.quantity }}
+        </h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </p>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Quantity"
+          v-model.number="quantity"
+          :class="{ danger: insufficientQuantity }"
+        />
       </div>
-      <div class="panel-body">
-        <div class="pull-left">
-          <input
-            type="number"
-            class="form-control"
-            placeholder="Quantity"
-            v-model.number="quantity"
-            :class="{ danger: insufficientQuantity }"
-          />
-        </div>
-        <div class="pull-right">
-          <button
-            class="btn btn-success"
-            @click="onSellStock"
-            :disabled="
-              insufficientQuantity ||
-                quantity <= 0 ||
-                !Number.isInteger(quantity)
-            "
-          >
-            {{ insufficientQuantity ? 'Not enough' : 'Sell' }}
-          </button>
-        </div>
+      <div class="card-footer bg-transparent border-success">
+        <button
+          class="btn btn-primary"
+          @click="onSellStock"
+          :disabled="
+            insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity)
+          "
+        >
+          {{ insufficientQuantity ? 'Not enough' : 'Sell' }}
+        </button>
       </div>
     </div>
   </div>
