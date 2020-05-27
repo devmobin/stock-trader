@@ -72,9 +72,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { save } from '@/api/local';
-import Portfolio from '@/store/models/Portfolio';
+import { mapActions } from "vuex";
+import Portfolio from "@/store/models/Portfolio";
 
 export default {
   data() {
@@ -83,13 +82,14 @@ export default {
   computed: {
     funds() {
       return this.$store.getters.getFunds;
-    },
+    }
   },
   methods: {
-    ...mapActions({
-      onRandomizeStocksPriceAction: 'onRandomizeStocksPriceAction',
-      onLoadDataAction: 'onLoadDataAction',
-    }),
+    ...mapActions([
+      "onRandomizeStocksPriceAction",
+      "onSaveToDataBaseAction",
+      "onLoadFromDataBaseAction"
+    ]),
     onEndDay() {
       this.onRandomizeStocksPriceAction();
     },
@@ -99,14 +99,14 @@ export default {
           this.$store.getters.getPortfolioStocks,
           this.$store.getters.getFunds
         ),
-        localStocks: this.$store.getters.getStocks,
+        localStocks: this.$store.getters.getStocks
       };
-      save(data);
+      this.onSaveToDataBaseAction(data);
     },
     onLoadData() {
-      this.onLoadDataAction();
-    },
-  },
+      this.onLoadFromDataBaseAction();
+    }
+  }
 };
 </script>
 

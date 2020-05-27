@@ -1,14 +1,27 @@
-import { load } from '../api/local';
-import Portfolio from './models/Portfolio';
+import Vue from "vue";
+import Portfolio from "./models/Portfolio";
 
-export const onLoadDataAction = ({ commit }) => {
-  const data = load();
-  if (data) {
-    commit('doSetStocks', data.localStocks);
+export const onSaveToDataBaseAction = (context, data) => {
+  Vue.http
+    .put("data.json", data)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+};
 
-    commit(
-      'doSetPortfolio',
-      new Portfolio(data.portfolio.stocks, data.portfolio.funds)
-    );
-  }
+export const onLoadFromDataBaseAction = ({ commit }) => {
+  Vue.http
+    .get("data.json")
+    .then(res => {
+      const data = res.body;
+
+      if (data) {
+        commit("doSetStocks", data.localStocks);
+
+        commit(
+          "doSetPortfolio",
+          new Portfolio(data.portfolio.stocks, data.portfolio.funds)
+        );
+      }
+    })
+    .catch(err => console.log(err));
 };
