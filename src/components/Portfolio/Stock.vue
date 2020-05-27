@@ -29,7 +29,7 @@
             insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity)
           "
         >
-          {{ insufficientQuantity ? 'Not enough' : 'Sell' }}
+          {{ insufficientQuantity ? "Not enough" : "Sell" }}
         </button>
       </div>
     </div>
@@ -37,15 +37,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import Order from '@/store/models/Order';
-import Stock from '@/store/models/Stock';
+import { mapActions } from "vuex";
+import Order from "@/store/models/Order";
+import Stock from "@/store/models/Stock";
 
 export default {
-  props: ['stock'],
+  props: ["stock"],
   data() {
     return {
-      quantity: 0,
+      quantity: 0
     };
   },
   computed: {
@@ -56,11 +56,12 @@ export default {
       let average =
         this.stock.buys.reduce((a, b) => a + b) / this.stock.buys.length;
       return average;
-    },
+    }
   },
   methods: {
     ...mapActions({
-      onSellStockAction: 'onSellStockAction',
+      onSellStockAction: "onSellStockAction",
+      onSetAlertAction: "onSetAlertAction"
     }),
     onSellStock() {
       const order = new Order(
@@ -68,9 +69,17 @@ export default {
         this.quantity
       );
       this.onSellStockAction(order);
+      const profit = (this.stock.price - this.average) * this.quantity;
+      const alert = {
+        title: `You sold ${this.stock.name} stocks`,
+        message: `sold ${
+          this.quantity
+        } by price of: $${this.stock.price.toLocaleString()}\nYour profit: $${profit.toLocaleString()}`
+      };
+      this.onSetAlertAction(alert);
       this.quantity = 0;
-    },
-  },
+    }
+  }
 };
 </script>
 

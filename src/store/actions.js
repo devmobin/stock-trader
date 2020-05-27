@@ -25,3 +25,7 @@ export const onLoadFromDataBaseAction = ({ commit }) => {
     })
     .catch(err => console.log(err));
 };
+
+export const onSetAlertAction = ({ commit }, alert) => {
+  commit("doSetAlert", alert);
+};

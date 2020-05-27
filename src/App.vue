@@ -1,6 +1,11 @@
 <template>
-  <div>
+  <div class="body">
     <Header></Header>
+    <template v-if="alert">
+      <Alert :title="alert.title"
+        ><small class="text-dark">{{ alert.message }}</small></Alert
+      >
+    </template>
     <div class="container mt-3">
       <transition name="slide" mode="out-in">
         <router-view></router-view>
@@ -10,19 +15,31 @@
 </template>
 
 <script>
-import Header from '@/components/Header';
+import Header from "@/components/Header";
+import Alert from "@/components/Alert";
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters({
+      alert: "getAlert"
+    })
+  },
   components: {
     Header,
+    Alert
   },
   created() {
-    this.$store.dispatch('onInitStocksAction');
-  },
+    this.$store.dispatch("onInitStocksAction");
+  }
 };
 </script>
 
 <style>
+.body {
+  position: relative;
+}
+
 .slide-enter-active {
   animation: slide-in 200ms ease-out forwards;
 }

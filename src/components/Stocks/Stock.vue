@@ -27,7 +27,7 @@
             insufficientFunds || +quantity <= 0 || !Number.isInteger(+quantity)
           "
         >
-          {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}
+          {{ insufficientFunds ? "Insufficient Funds" : "Buy" }}
         </button>
       </div>
     </div>
@@ -35,14 +35,14 @@
 </template>
 
 <script>
-import Order from '@/store/models/Order';
-import Stock from '@/store/models/Stock';
+import Order from "@/store/models/Order";
+import Stock from "@/store/models/Stock";
 
 export default {
-  props: ['stock'],
+  props: ["stock"],
   data() {
     return {
-      quantity: 0,
+      quantity: 0
     };
   },
   computed: {
@@ -59,7 +59,7 @@ export default {
     todayMax() {
       const { max } = this.$store.getters.getMinMaxPrice(this.stock.price);
       return max;
-    },
+    }
   },
   methods: {
     onBuyStock() {
@@ -67,10 +67,16 @@ export default {
         new Stock(this.stock.id, this.stock.name, this.stock.price),
         this.quantity
       );
-      this.$store.dispatch('onBuyStockAction', order);
+      this.$store.dispatch("onBuyStockAction", order);
+      const total = this.stock.price * this.quantity;
+      const alert = {
+        title: `You bought ${this.stock.name} stock`,
+        message: `bought at $${this.stock.price.toLocaleString()} price point\nTotal: $${total.toLocaleString()}`
+      };
+      this.$store.dispatch("onSetAlertAction", alert);
       this.quantity = 0;
-    },
-  },
+    }
+  }
 };
 </script>
 
