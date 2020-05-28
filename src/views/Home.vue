@@ -5,6 +5,7 @@
     <h6>Click on 'End Day' to begin a New Day!</h6>
     <hr />
     <p>Your Funds: {{ funds | currency }}</p>
+    <p>save and load will not work until auth been added</p>
   </div>
 </template>
 
